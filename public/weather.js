@@ -5,6 +5,8 @@ const input = document.querySelector(".top-banner input");
 const msg = document.querySelector(".top-banner .msg");
 const list = document.querySelector(".ajax-section .cities");
 
+const modal = document.querySelector(".modal");
+
 window.onload=getLocation;
 
 function getLocation() {
@@ -12,7 +14,6 @@ function getLocation() {
     navigator.geolocation.getCurrentPosition(function(position){
       var lat = Number.parseFloat(position.coords.latitude).toFixed(2);
       var long = Number.parseFloat(position.coords.longitude).toFixed(2);
-      console.log(lat+" "+long);
       
       const url = `http://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${long}&cnt=1&appid=${api_key}&units=metric`;
 
@@ -29,16 +30,18 @@ function getLocation() {
         li.classList.add("city");
         const markup = `
         <button value="${name}" onclick="xButton(this.value)">X</button>
-        <h2 class="city-name" data-name="${name}, ${sys.country}">
-            <span>${name}</span>
-            <sup>${sys.country}</sup>
-        </h2>
-        <div class="city-temp">${Math.round(main.temp)}<sup>'C</sup>
+        <div id="modalBtn" onclick="openModal()">
+          <h2 class="city-name" data-name="${name}, ${sys.country}">
+              <span>${name}</span>
+              <sup>${sys.country}</sup>
+          </h2>
+          <div class="city-temp">${Math.round(main.temp)}<sup>'C</sup>
+          </div>
+          <figure>
+              <img class="city-icon" src=${icon} alt=${weather[0]["main"]}>
+              <figcaption>${weather[0]["description"]}</figcaption>
+          </figure>
         </div>
-        <figure>
-            <img class="city-icon" src=${icon} alt=${weather[0]["main"]}>
-            <figcaption>${weather[0]["description"]}</figcaption>
-        </figure>
         `;
 
         li.innerHTML = markup;
@@ -57,6 +60,16 @@ function getLocation() {
      else {
           window.alert("Could not get your location. you can search yourself.");
     }
+}
+
+function openModal() {
+  modal.style.display = "block";
+}
+
+window.onclick = function(e) {
+  if(e.target == modal) {
+  modal.style.display = "none";
+  }
 }
 
 
