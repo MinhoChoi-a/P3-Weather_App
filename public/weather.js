@@ -28,6 +28,7 @@ function getLocation() {
         const li = document.createElement("li");
         li.classList.add("city");
         const markup = `
+        <button value="${name}" onclick="xButton(this.value)">X</button>
         <h2 class="city-name" data-name="${name}, ${sys.country}">
             <span>${name}</span>
             <sup>${sys.country}</sup>
@@ -56,6 +57,22 @@ function getLocation() {
      else {
           window.alert("Could not get your location. you can search yourself.");
     }
+}
+
+
+function xButton(value) {
+
+  const nameList = document.querySelectorAll(".ajax-section .cities .city-name span");
+  
+  for(var i =0; i<nameList.length; i++)
+  {
+    console.log(list.childNodes);
+    if(value==nameList[i].innerHTML)
+    {
+      list.removeChild(list.childNodes[i+1]);
+    }
+  }
+
 }
 
 
@@ -110,6 +127,7 @@ form.addEventListener("submit", e => {
         const li = document.createElement("li");
         li.classList.add("city");
         const markup = `
+        <button value="${name}" onclick="xButton(this.value)">X</button>
         <h2 class="city-name" data-name="${name}, ${sys.country}">
             <span>${name}</span>
             <sup>${sys.country}</sup>

@@ -133,7 +133,7 @@ body {
 .ajax-section .cities {
     display: grid;
     grid-gap: 32px 20px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 
 .ajax-section .city-name sup {
@@ -160,7 +160,7 @@ body {
 
 @media screen and (max-width: 500px) {
     .ajax-section .cities {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -168,13 +168,22 @@ body {
 
 .ajax-section .city {
     position: relative;
-    padding: 40px 10%;
+    padding: 10px 10%;
     border-radius: 20px;
     background: var(--text_light);
     color: var(--text_med);
 }
 
-.ajax-section .city::after {
+.ajax-section button {
+    margin-bottom : 5px;
+    margin-left:85%;
+    background: #53627c;
+    padding:5 10 5 10;
+    border-radius: 100px;
+    color: white;
+}
+
+.ajax-section .city:hover::after {
     content: '';
     width: 90%;
     height: 50px;
@@ -187,25 +196,3 @@ body {
     background: var(--text_light);
 }
 
-
-
-
-#getWeather {
-    height: 70px;
-    width: 200px;
-    font-size: 17px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-family: 'Fresca', sans-serif;
-    background-color: #FFFFFF;
-    color: #002db3;   
-}
-
-#getWeather:hover {
-    background-color: #002db3;
-    color: #FFFFFF;
-    border: 3px solid #FFFFFF;
-    border-radius: 5px;
-}
