@@ -218,17 +218,29 @@ body {
     width: 80%; /* Could be more or less, depending on screen size */
   }
 
-  .modal .daily {
+  .modal-content .daily {
     display: grid;
-    grid-gap: 32px 20px;
-    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 10px;
+    grid-template-columns: repeat(7, 1fr);
     overflow: auto;
 }
 
-.modal .forecast {
+.modal-content .forecast {
     position: relative;
+    min-width: 70px;
     padding: 10px 10%;
     border-radius: 20px;
     background: var(--text_light);
     color: var(--text_med);
+}
+
+.top-banner .sub-heading{
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+
+.top-banner .sub-heading span {
+    margin-left: 10px;
 }

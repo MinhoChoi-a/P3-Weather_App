@@ -57,6 +57,14 @@ function getLocation() {
     form.reset();
     input.focus();
     
+    var day = new Date();
+    
+    const info = (day.toString()).split(" ");
+
+    day = info[1]+" "+info[2]+" "+info[0];
+
+    document.querySelector(".sub-heading .date").innerHTML = day;
+
   });
 }
      else {
@@ -78,13 +86,18 @@ function openModal(val) {
         
         const {daily} = data;
         
-        for(var i=0; i< daily.length; i++){
+        for(var i=1; i< daily.length; i++){
         const li = document.createElement("li");
         li.classList.add("forecast");
         
+        let date = new Date(daily[i].dt * 1000);
+
+        const day = (date.toString()).split(" ");
+
         let icon = `https://openweathermap.org/img/wn/${daily[i].weather[0]["icon"]}@2x.png`;
         
         let markup = `
+        <p>${day[0]}</p>
         <div class="city-temp">${Math.round(daily[i].temp.day)}<sup>'C</sup>
           </div>
           <figure>
