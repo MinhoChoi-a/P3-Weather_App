@@ -5,6 +5,8 @@ const input = document.querySelector(".top-banner input");
 const msg = document.querySelector(".top-banner .msg");
 const list = document.querySelector(".ajax-section .cities");
 
+const dailyFor = document.querySelector(".modal .daily");
+
 const modal = document.querySelector(".modal");
 
 window.onload=getLocation;
@@ -21,16 +23,16 @@ function getLocation() {
       .then(response => response.json())
       .then(data => {
         
-        console.log(data);
-        
-        const {main, name, sys, weather} = data.list[0];
+        const {main, name, sys, weather, coord} = data.list[0];
         const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+
+        const val = (coord.lat).toString()+ '/' + (coord.lon).toString();
 
         const li = document.createElement("li");
         li.classList.add("city");
         const markup = `
         <button value="${name}" onclick="xButton(this.value)">X</button>
-        <div id="modalBtn" onclick="openModal()">
+        <div id="modalBtn" onclick="openModal('${val}')">
           <h2 class="city-name" data-name="${name}, ${sys.country}">
               <span>${name}</span>
               <sup>${sys.country}</sup>
@@ -62,8 +64,43 @@ function getLocation() {
     }
 }
 
-function openModal() {
+function openModal(val) {
+  document.querySelector(".modal .daily").innerHTML ="";
+
+  const coord = val.split("/");
+
+  const url = `http://api.openweathermap.org/data/2.5/onecall?lat=${coord[0]}&lon=${coord[1]}&exclude={current, minutely, hourly}&appid=${api_key}`;
+  
+      fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        
+        
+        const {daily} = data;
+        
+        for(var i=0; i< daily.length; i++){
+        const li = document.createElement("li");
+        li.classList.add("forecast");
+        
+        let icon = `https://openweathermap.org/img/wn/${daily[i].weather[0]["icon"]}@2x.png`;
+        
+        let markup = `
+        <div class="city-temp">${Math.round(daily[i].temp.day)}<sup>'C</sup>
+          </div>
+          <figure>
+              <img class="city-icon" src=${icon} alt="main"}>
+              <figcaption>${daily[i].weather[0]["description"]}</figcaption>
+          </figure>
+        </div>
+        `;
+
+        li.innerHTML += markup;
+        dailyFor.appendChild(li);
+        }
+      });
+  
   modal.style.display = "block";
+
 }
 
 window.onclick = function(e) {
@@ -134,13 +171,16 @@ form.addEventListener("submit", e => {
         
         console.log(data);
         
-        const {main, name, sys, weather} = data;
+        const {main, name, sys, weather, coord} = data;
         const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+
+        const val = (coord.lat).toString()+ '/' + (coord.lon).toString();
 
         const li = document.createElement("li");
         li.classList.add("city");
         const markup = `
         <button value="${name}" onclick="xButton(this.value)">X</button>
+        <div id="modalBtn" onclick="openModal('${val}')">
         <h2 class="city-name" data-name="${name}, ${sys.country}">
             <span>${name}</span>
             <sup>${sys.country}</sup>
@@ -151,6 +191,7 @@ form.addEventListener("submit", e => {
             <img class="city-icon" src=${icon} alt=${weather[0]["main"]}>
             <figcaption>${weather[0]["description"]}</figcaption>
         </figure>
+        </div>
         `;
 
         li.innerHTML = markup;

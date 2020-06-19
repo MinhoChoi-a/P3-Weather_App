@@ -217,3 +217,18 @@ body {
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
   }
+
+  .modal .daily {
+    display: grid;
+    grid-gap: 32px 20px;
+    grid-template-columns: repeat(8, 1fr);
+    overflow: auto;
+}
+
+.modal .forecast {
+    position: relative;
+    padding: 10px 10%;
+    border-radius: 20px;
+    background: var(--text_light);
+    color: var(--text_med);
+}
