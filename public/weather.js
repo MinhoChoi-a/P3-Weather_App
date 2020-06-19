@@ -1,4 +1,3 @@
-const API_KEY = require('./api.js').key;
 
 const form = document.querySelector(".top-banner form");
 const input = document.querySelector(".top-banner input");
@@ -9,7 +8,7 @@ form.addEventListener("submit", e => {
     e.preventDefault();
     let inputVal = input.value;
     
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${API_KEY}&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${key}&units=metric`;
     
     const listItems = list.querySelectorAll(".ajax-section .city");
     const listItemsArray = Array.from(listItems);
