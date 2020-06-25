@@ -1,4 +1,4 @@
-
+const api_key = ;
 
 const form = document.querySelector(".top-banner form");
 const input = document.querySelector(".top-banner input");
@@ -29,15 +29,18 @@ function getLocation() {
         const val = (coord.lat).toString()+ '/' + (coord.lon).toString();
 
         const li = document.createElement("li");
+        
         li.classList.add("city");
+        
         const markup = `
-        <button value="${name}" onclick="xButton(this.value)">X</button>
+        <button value="${name}" onclick="xButton(this.value)"><span class="material-icons">
+        remove_circle_outline</span></button>
         <div id="modalBtn" onclick="openModal('${val}')">
           <h2 class="city-name" data-name="${name}, ${sys.country}">
               <span>${name}</span>
               <sup>${sys.country}</sup>
           </h2>
-          <div class="city-temp">${Math.round(main.temp)}<sup>'C</sup>
+          <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup>
           </div>
           <figure>
               <img class="city-icon" src=${icon} alt=${weather[0]["main"]}>
@@ -61,7 +64,7 @@ function getLocation() {
     
     const info = (day.toString()).split(" ");
 
-    day = info[1]+" "+info[2]+" "+info[0];
+    day = info[1].toUpperCase()+" "+info[2]+" "+info[0].toUpperCase();
 
     document.querySelector(".sub-heading .date").innerHTML = day;
 
@@ -91,14 +94,20 @@ function openModal(val) {
         li.classList.add("forecast");
         
         let date = new Date(daily[i].dt * 1000);
-
-        const day = (date.toString()).split(" ");
+        
+        var day = new Date();
+    
+        const info = (day.toString()).split(" ");
+    
+        day = info[2]+" "+info[0].toUpperCase();
+    
+        //const day = (date.toString()).split(" ");
 
         let icon = `https://openweathermap.org/img/wn/${daily[i].weather[0]["icon"]}@2x.png`;
         
         let markup = `
-        <p>${day[0]}</p>
-        <div class="city-temp">${Math.round(daily[i].temp.day)}<sup>'C</sup>
+        <p>${day}</p>
+        <div class="city-temp">${Math.round(daily[i].temp.day)}<sup>°C</sup>
           </div>
           <figure>
               <img class="city-icon" src=${icon} alt="main"}>
@@ -129,7 +138,6 @@ function xButton(value) {
   
   for(var i =0; i<nameList.length; i++)
   {
-    console.log(list.childNodes);
     if(value==nameList[i].innerHTML)
     {
       list.removeChild(list.childNodes[i+1]);
@@ -192,7 +200,8 @@ form.addEventListener("submit", e => {
         const li = document.createElement("li");
         li.classList.add("city");
         const markup = `
-        <button value="${name}" onclick="xButton(this.value)">X</button>
+        <button value="${name}" onclick="xButton(this.value)"><span class="material-icons">
+        remove_circle_outline</span></button>
         <div id="modalBtn" onclick="openModal('${val}')">
         <h2 class="city-name" data-name="${name}, ${sys.country}">
             <span>${name}</span>

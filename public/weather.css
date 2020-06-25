@@ -1,12 +1,11 @@
 :root {
-    --bg_main: #0a1f44;
-    --text_light: #fff;
-    --text_med: #53627c;
-    --text_dark: #1e2432;
-    --red: #ff1e42;
-    --darkred: #c3112d;
-    --orange: #ff8c00;
-  }
+    --bg_main: #5cdb95;
+    --text_light: #edf5e1;
+    --text_dark: #05386b;
+    --dark_green: #379683;
+    --light_green: #8ee4af;
+    
+}
 
 
   * {
@@ -14,7 +13,17 @@
       padding: 0;
       box-sizing: border-box;
       font-weight: normal;
-  }
+    }
+
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;
+      }
+    /* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: linear-gradient(90deg, rgba(5,56,107,1) 0%, rgba(55,150,131,1) 50%, rgba(142,228,175,1) 100%);
+    }
 
 button {
     cursor: pointer;
@@ -32,8 +41,8 @@ button, input {
 }
 
 img {
-    display: block;
     max-width: 100%;
+    padding:0;
     height: auto;
 }
 
@@ -50,20 +59,29 @@ body {
 
 /* CUSTOM VARIABLES */
 
-.top-banner {
+.top-banner .container{
     color: var(--text_light);
+    text-align: center;
+    display: flexbox;
 }
 
 .heading {
     font-weight: bold;
     font-size: 4rem;
-    letter-spacing: 0.02em;
-    padding: 0 0 30px 0;
+    letter-spacing: 0.5em;
+    margin-bottom: 5px;
+}
+
+.sub-heading{
+    font-size: 4em;
+    letter-spacing: 0.5em;
+    margin-top: 0;
+    margin-bottom: 40px;
 }
 
 .top-banner form {
     position: relative;
-    display: flex;
+    float: inherit;
     align-items: center;
 }
 
@@ -85,12 +103,12 @@ body {
     padding: 15px 20px;
     margin-left: 15px;
     border-radius: 5px;
-    background: var(--red);
+    background: var(--dark_green);
     transition: background 0.3s ease-in-out;
 }
 
 .top-banner form button:hover {
-    background: var(--darked);
+    background: var(--text_dark);
 }
 
 .top-banner form .msg {
@@ -121,6 +139,11 @@ body {
         min-height: 0;
         margin-top: 10px;
     }
+
+    .heading, .sub-heading {
+        font-size: 2.2em;
+        letter-spacing: 0.2em;
+    }
 }
 
 
@@ -128,12 +151,14 @@ body {
 
 .ajax-section {
     margin: 50px 0 20px;
+    
 }
 
 .ajax-section .cities {
     display: grid;
     grid-gap: 32px 20px;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    
 }
 
 .ajax-section .city-name sup {
@@ -170,31 +195,42 @@ body {
     position: relative;
     padding: 10px 10%;
     border-radius: 20px;
-    background: var(--text_light);
-    color: var(--text_med);
+    background: var(--text_dark);
+    color: var(--text_light);
+    
+    
 }
 
 .ajax-section button {
     margin-bottom : 5px;
-    margin-left:85%;
-    background: #53627c;
-    padding:5 10 5 10;
-    border-radius: 100px;
-    color: white;
+    color: var(--text_light);
 }
 
-.ajax-section .city:hover::after {
+.ajax-section .city::after {
     content: '';
-    width: 90%;
-    height: 50px;
+    width: 95%;
+    height: 95%;
     position: absolute;
     bottom: -12px;
-    left: 5%;
+    left: 10%;
     z-index: -1;
-    opacity: 0.3;
+    opacity: 1.0;
     border-radius: 20px;
-    background: var(--text_light);
+    background: var(--dark_green);
+    
 }
+
+.ajax-section .city .city-temp {
+    font-size: 2em;
+    margin-top: 5px;
+}
+
+#modalBtn{
+    text-align: center;
+}
+
+
+
 
 .modal {
     display: none; /* Hidden by default */
@@ -205,16 +241,16 @@ body {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    transition: 1s ease-in-out;
   }
   
   /* Modal Content/Box */
   .modal-content {
-    background-color: #fefefe;
+    background-color: var(--text_light);
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
+    border-radius: 20px;
     width: 80%; /* Could be more or less, depending on screen size */
   }
 
@@ -226,21 +262,15 @@ body {
 }
 
 .modal-content .forecast {
+    text-align: center;
     position: relative;
-    min-width: 70px;
+    min-width: 100px;
     padding: 10px 10%;
-    border-radius: 20px;
-    background: var(--text_light);
-    color: var(--text_med);
+    color: var(--text_dark);
 }
 
-.top-banner .sub-heading{
-    font-size: 2em;
-    margin-top: 0;
-    margin-bottom: 15px;
-}
+.modal-content .forecast .city-temp{
 
+    font-size: 1.2em;
 
-.top-banner .sub-heading span {
-    margin-left: 10px;
 }
