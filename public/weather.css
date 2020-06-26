@@ -286,6 +286,35 @@ body {
 .modal-content .forecast .city-temp{
 
     font-size: 1.2em;
-
 }
 
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    
+}
+
+.autocomplete-items {
+    position: absolute;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 300px;
+    overflow: auto;
+    text-align: left;
+}
+  
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--bg_main);
+    border-bottom: 1px solid var(--text_light);
+}
+
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: var(--text_dark);
+  }
