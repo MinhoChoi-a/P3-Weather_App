@@ -1,4 +1,4 @@
-const api_key = ;
+const api_key = 'c2085ecd0134f3b169a4e368c4bc10c6';
 
 const form = document.querySelector(".top-banner form");
 const input = document.querySelector(".top-banner input");
@@ -36,10 +36,10 @@ function getLocation() {
         <button value="${name}" onclick="xButton(this.value)"><span class="material-icons">
         remove_circle_outline</span></button>
         <div id="modalBtn" onclick="openModal('${val}')">
-          <h2 class="city-name" data-name="${name}, ${sys.country}">
+          <div class="city-name" data-name="${name}, ${sys.country}">
               <span>${name}</span>
               <sup>${sys.country}</sup>
-          </h2>
+          </div>
           <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup>
           </div>
           <figure>
@@ -86,7 +86,6 @@ function openModal(val) {
       .then(response => response.json())
       .then(data => {
         
-        
         const {daily} = data;
         
         for(var i=1; i< daily.length; i++){
@@ -110,7 +109,7 @@ function openModal(val) {
         <div class="city-temp">${Math.round(daily[i].temp.day)}<sup>°C</sup>
           </div>
           <figure>
-              <img class="city-icon" src=${icon} alt="main"}>
+              <img class="city-iconMini" src=${icon} alt="main"}>
               <figcaption>${daily[i].weather[0]["description"]}</figcaption>
           </figure>
         </div>
@@ -207,7 +206,7 @@ form.addEventListener("submit", e => {
             <span>${name}</span>
             <sup>${sys.country}</sup>
         </h2>
-        <div class="city-temp">${Math.round(main.temp)}<sup>'C</sup>
+        <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup>
         </div>
         <figure>
             <img class="city-icon" src=${icon} alt=${weather[0]["main"]}>

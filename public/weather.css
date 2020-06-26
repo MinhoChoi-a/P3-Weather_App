@@ -54,7 +54,7 @@ body {
     font: 1rem/1.3 "Roboto", sans-serif;
     background: var(--bg_main);
     color: var(--text_dark);
-    padding: 50px;
+    padding: 20px;
 }
 
 /* CUSTOM VARIABLES */
@@ -150,7 +150,7 @@ body {
 /* CITIES */
 
 .ajax-section {
-    margin: 50px 0 20px;
+    margin: 25px 0px 0px 0px;
     
 }
 
@@ -160,6 +160,13 @@ body {
     grid-template-columns: repeat(6, 1fr);
     
 }
+
+.ajax-section #modalBtn .city-name {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+
 
 .ajax-section .city-name sup {
     
@@ -187,7 +194,14 @@ body {
     .ajax-section .cities {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .ajax-section .city-name {
+        overflow: hidden;
+        font-size: 1em;
+    }
+
 }
+
 
 /* CUSTOM VARIABLES FOR CITIES */
 
@@ -274,3 +288,4 @@ body {
     font-size: 1.2em;
 
 }
+
