@@ -76,13 +76,13 @@ body {
     font-size: 4em;
     letter-spacing: 0.5em;
     margin-top: 0;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .top-banner form {
     position: relative;
     float: inherit;
-    align-items: center;
+    text-align:  center;
 }
 
 .top-banner form input {
@@ -112,11 +112,8 @@ body {
 }
 
 .top-banner form .msg {
-    position: absolute;
-    bottom: -40px;
-    left: 0;
-    max-width: 450px;
-    min-height: 40px;
+    position: static;
+    font-size: 1.2em;
 }
 
 @media screen and (max-width: 700px) {
@@ -131,13 +128,6 @@ body {
 
     .top-banner form button {
         margin: 20px 0 0 0;
-    }
-
-    .top-banner form .msg {
-        position: static;
-        max-width: none;
-        min-height: 0;
-        margin-top: 10px;
     }
 
     .heading, .sub-heading {

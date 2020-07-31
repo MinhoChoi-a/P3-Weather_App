@@ -19,7 +19,7 @@ function getLocation() {
       var lat = Number.parseFloat(position.coords.latitude).toFixed(2);
       var long = Number.parseFloat(position.coords.longitude).toFixed(2);
       
-      const url = `http://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${long}&cnt=1&appid=${api_key}&units=metric`;
+      const url = `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${long}&cnt=1&appid=${api_key}&units=metric`;
 
       fetch(url)
       .then(response => response.json())
@@ -77,12 +77,31 @@ function getLocation() {
     }
 }
 
+var dayList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 function openModal(val) {
   document.querySelector(".modal .daily").innerHTML ="";
 
   const coord = val.split("/");
 
-  const url = `http://api.openweathermap.org/data/2.5/onecall?lat=${coord[0]}&lon=${coord[1]}&exclude={current, minutely, hourly}&appid=${api_key}`;
+  var date = new Date();
+  var day;
+  var list = [];
+
+  for(var i=0; i < 7; i++) {
+  
+  if(date.getDay()+i < 7) {
+    day = dayList[date.getDay()+i];
+  }
+  else {
+    day = dayList[date.getDay()+i - 7];
+  }
+
+  list.push(day);
+
+  }
+
+  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord[0]}&lon=${coord[1]}&exclude={current, minutely, hourly}&appid=${api_key}`;
   
       fetch(url)
       .then(response => response.json())
@@ -96,19 +115,13 @@ function openModal(val) {
         
         let date = new Date(daily[i].dt * 1000);
         
-        var day = new Date();
-    
-        const info = (day.toString()).split(" ");
-    
-        day = info[2]+" "+info[0].toUpperCase();
-    
         //const day = (date.toString()).split(" ");
 
         let icon = `https://openweathermap.org/img/wn/${daily[i].weather[0]["icon"]}@2x.png`;
         
         let markup = `
-        <p>${day}</p>
-        <div class="city-temp">${Math.round(daily[i].temp.day)}<sup>°C</sup>
+        <p>${list[i-1]}</p>
+        <div class="city-temp">${(Math.round(daily[i].temp.day))/10}<sup>°C</sup>
           </div>
           <figure>
               <img class="city-iconMini" src=${icon} alt="main"}>
@@ -221,7 +234,7 @@ form.addEventListener("submit", e => {
         list.appendChild(li);
       })
       .catch(() => {
-        msg.textContent = "Please search for a valid city 😩";
+        msg.textContent = "Please search for a valid city";
       });
     
     msg.textContent = "";
