@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const http = require('http');
+
 const express = require('express');
 const app = express();
 var path = require('path');
@@ -22,7 +24,7 @@ fs.createReadStream('./data/worldcities_weather.csv')
 
 const api_key = process.env.API_KEY;
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -36,5 +38,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-	console.log(`Server running on port ${PORT}`);
+console.log(`Server running on port ${PORT}`);
 });
