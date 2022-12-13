@@ -9,7 +9,7 @@
   "dependencies": {
     "csv-parser": "^2.3.3",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "pug": "^3.0.0"
   },
   "scripts": {
